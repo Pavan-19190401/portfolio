@@ -47,9 +47,9 @@ const EXPERIENCES = [
     description:
       "Building production-grade full-stack web applications and hardware robotics systems.",
     highlights: [
-      "Built real-time crypto analytics platform with CoinGecko API, TradingView charting, and MongoDB REST APIs",
-      "Engineered autonomous human-following robot using Arduino Uno, ultrasonic & IR sensor fusion, and L293D motor drivers",
-      "Proficient in Python, C/C++, Java, React.js, Node.js, Express.js, and core CS fundamentals (OOPs, DBMS, OS, Networks)",
+      "Engineered TraceLens: LLM prompt waterfall latency tracing, token cost analytics, and neural telemetry",
+      "Built CryptoSphere: live crypto tracking with CoinGecko API, TradingView charting, and MongoDB REST APIs",
+      "Programmed Human Following Robot with sensor fusion (Ultrasonic + IR) in C/C++ on Arduino Uno",
     ],
   },
 ];

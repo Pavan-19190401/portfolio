@@ -361,11 +361,24 @@ const GhostCursor: React.FC<GhostCursorProps> = ({
     });
     resizeObsRef.current = ro;
     ro.observe(parent);
-    ro.observe(host);
+    let isIntersecting = true;
+    const io = new IntersectionObserver(([entry]) => {
+      isIntersecting = entry.isIntersecting;
+      if (isIntersecting && !runningRef.current && active) {
+        runningRef.current = true;
+        rafRef.current = requestAnimationFrame(animate);
+      }
+    });
+    io.observe(parent);
 
     const start = typeof performance !== 'undefined' ? performance.now() : Date.now();
     const animate = () => {
       if (!active) return;
+      if (!isIntersecting) {
+        runningRef.current = false;
+        return;
+      }
+      runningRef.current = true;
 
       if (!hasValidSizeRef.current) {
         rafRef.current = requestAnimationFrame(animate);
@@ -451,9 +464,9 @@ const GhostCursor: React.FC<GhostCursorProps> = ({
       ensureLoop();
     };
 
-    parent.addEventListener('pointermove', onPointerMove, { passive: true });
-    parent.addEventListener('pointerenter', onPointerEnter, { passive: true });
-    parent.addEventListener('pointerleave', onPointerLeave, { passive: true });
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('pointerenter', onPointerEnter, { passive: true });
+    window.addEventListener('pointerleave', onPointerLeave, { passive: true });
 
     ensureLoop();
 
@@ -465,10 +478,11 @@ const GhostCursor: React.FC<GhostCursorProps> = ({
       runningRef.current = false;
       rafRef.current = null;
 
-      parent.removeEventListener('pointermove', onPointerMove);
-      parent.removeEventListener('pointerenter', onPointerEnter);
-      parent.removeEventListener('pointerleave', onPointerLeave);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerenter', onPointerEnter);
+      window.removeEventListener('pointerleave', onPointerLeave);
       resizeObsRef.current?.disconnect();
+      io.disconnect();
 
       scene.clear();
       geom.dispose();

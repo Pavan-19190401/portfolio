@@ -94,13 +94,28 @@ const DriftWall: React.FC<DriftWallProps> = ({
   const [activeId, setActiveId] = useState<string | null>(null);
   const activeIdRef = useRef<string | null>(null);
   const [reduced, setReduced] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setReduced(prefersReducedMotion());
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
     mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { rootMargin: "150px" }
+    );
+    observer.observe(el);
+
+    return () => {
+      mq.removeEventListener("change", onChange);
+      observer.disconnect();
+    };
   }, []);
 
   const columnItems = useMemo(() => {
@@ -205,13 +220,21 @@ const DriftWall: React.FC<DriftWallProps> = ({
       rafRef.current = requestAnimationFrame(animate);
     };
 
-    rafRef.current = requestAnimationFrame(animate);
+    if (isVisible) {
+      rafRef.current = requestAnimationFrame(animate);
+    } else {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = null;
+      lastTsRef.current = null;
+    }
+
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
       lastTsRef.current = null;
     };
   }, [
+    isVisible,
     baseVelocities,
     columnMeta,
     pauseOnHover,

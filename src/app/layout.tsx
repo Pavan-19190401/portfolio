@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, Poppins, Josefin_Sans } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/CustomCursor";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -31,38 +32,34 @@ const josefinSans = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Vennu Manikanta Pavan — Full Stack Developer & AI/ML Engineer",
+  title: "Vennu Manikanta Pavan — Full-Stack Developer & AI/ML Engineer",
   description:
-    "Portfolio of Vennu Manikanta Pavan — B.Tech CSE (AI & ML) undergraduate at CMR Institute of Technology, Hyderabad. Full-stack developer and AI/ML engineer crafting intelligent digital solutions, real-time analytics platforms, and deep learning architectures.",
+    "Portfolio of Vennu Manikanta Pavan — B.Tech CSE (AI & ML) undergraduate at CMRIT Hyderabad specializing in full-stack web development, machine learning, and embedded robotics.",
   keywords: [
     "Vennu Manikanta Pavan",
     "Manikanta Pavan",
-    "Pavan Vennu",
-    "Full Stack Developer",
     "AI & ML Engineer",
+    "Full Stack Developer",
     "Machine Learning",
-    "React",
+    "Python Developer",
+    "React Developer",
     "Next.js",
-    "Node.js",
-    "Python",
-    "TensorFlow",
-    "CryptoSphere",
-    "TraceLens",
+    "Deep Learning",
     "Portfolio",
   ],
   authors: [{ name: "Vennu Manikanta Pavan" }],
   openGraph: {
-    title: "Vennu Manikanta Pavan — Full Stack Developer & AI/ML Engineer",
+    title: "Vennu Manikanta Pavan — Full-Stack Developer & AI/ML Engineer",
     description:
-      "Full-stack web development, machine learning pipelines, and intelligent systems by Vennu Manikanta Pavan.",
+      "Full-stack web architectures, deep learning systems, and intelligent robotics.",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Vennu Manikanta Pavan — Full Stack Developer & AI/ML Engineer",
+    title: "Vennu Manikanta Pavan — Full-Stack Developer & AI/ML Engineer",
     description:
-      "Full-stack web development, machine learning pipelines, and intelligent systems by Vennu Manikanta Pavan.",
+      "Full-stack web architectures, deep learning systems, and intelligent robotics.",
   },
   robots: {
     index: true,
@@ -77,6 +74,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${spaceGrotesk.variable} ${inter.variable} ${poppins.variable} ${josefinSans.variable} antialiased`}
     >
       <body className="min-h-screen bg-void text-cloud overflow-x-hidden">
+        <CustomCursor />
         {children}
       </body>
     </html>

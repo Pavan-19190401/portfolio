@@ -8,6 +8,7 @@ import StaggeredMenu from "@/components/StaggeredMenu";
 import Hero from "@/components/Hero";
 import Introduction from "@/components/Introduction";
 import Projects from "@/components/Projects";
+import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
@@ -27,8 +28,7 @@ export default function Home() {
       {/* Scroll progress bar */}
       {!isLoading && <ScrollProgress />}
 
-      {/* Noise overlay */}
-      <div className="noise-overlay" aria-hidden="true" />
+
 
       {/* Navigation — StaggeredMenu stacked on left side */}
       {!isLoading && (
@@ -36,14 +36,17 @@ export default function Home() {
           position="left"
           items={[
             { label: "Projects", ariaLabel: "Go to Projects section", link: "#projects" },
+            { label: "Skills", ariaLabel: "Go to Skills section", link: "#skills" },
             { label: "Experience", ariaLabel: "Go to Experience section", link: "#experience" },
-            { label: "Education", ariaLabel: "Go to Education & Certifications section", link: "#education" },
+            { label: "Education", ariaLabel: "Go to Education section", link: "#education" },
+            { label: "Resume", ariaLabel: "Open Official Resume PDF", link: "/resume.pdf" },
             { label: "Contact", ariaLabel: "Go to Contact section", link: "#contact" },
           ]}
           socialItems={[
             { label: "GitHub", link: "https://github.com/Pavan-19190401" },
-            { label: "LinkedIn", link: "https://linkedin.com/in/manikanta-pavan-vennu1906" },
+            { label: "LinkedIn", link: "https://www.linkedin.com/in/manikanta-pavan-vennu1906" },
             { label: "Email", link: "mailto:manikantapavanv@gmail.com" },
+            { label: "Phone", link: "tel:+917396870319" },
           ]}
           displaySocials={true}
           displayItemNumbering={true}
@@ -62,6 +65,7 @@ export default function Home() {
 
           <Introduction />
           <Projects />
+          <Skills />
           <Experience />
           <Education />
           <Contact />

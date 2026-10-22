@@ -36,10 +36,7 @@ export default function Introduction() {
 
           {/* Main manifesto text */}
           <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-white leading-[1.45] tracking-tight text-center">
-            I believe great software is born at the intersection of engineering
-            rigor and intelligent systems. From real-time cryptocurrency platforms
-            and LLM observability to deep learning architectures and embedded sensor
-            fusion, every system is an opportunity to solve real problems with precision.
+            I believe modern engineering thrives at the intersection of robust full-stack architecture and intelligent machine learning. From scalable RESTful platforms and real-time analytics to deep convolutional neural networks and robotics, every line of code is an opportunity to solve real-world problems.
           </p>
 
         </div>

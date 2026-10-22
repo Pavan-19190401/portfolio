@@ -10,48 +10,46 @@ if (typeof window !== "undefined") {
 
 const EXPERIENCES = [
   {
-    company: "Technook",
-    role: "AI Mentorship Intern",
-    duration: "May 2024 — Jun 2024",
-    location: "Hyderabad, India",
-    color: "var(--ember)",
-    glowColor: "rgba(160, 42, 34, 0.25)",
-    description:
-      "Built and evaluated AI/ML models; implemented comprehensive data preprocessing pipelines and assessed performance using rigorous machine learning evaluation metrics.",
-    highlights: [
-      "Built and evaluated AI/ML models across predictive modeling and data pipelines",
-      "Implemented data preprocessing pipelines (cleaning, normalization, feature engineering)",
-      "Assessed performance benchmarks using accuracy, precision, recall, and F1-score",
-    ],
-  },
-  {
-    company: "Research & Development Project",
-    role: "Team Leader — Deepfake Detection System",
+    company: "CMRIT · Academic Research",
+    role: "Team Leader — Deepfake Detection R&D",
     duration: "2025 — 2026",
-    location: "CMR Institute of Technology",
     color: "var(--ember)",
     glowColor: "rgba(160, 42, 34, 0.25)",
     description:
-      "Led full project lifecycle of a CNN-based deepfake detection system; based on a prior review of 112 papers where CNN architectures averaged 89.73% accuracy and ensembles reached 99.65%.",
+      "Led the full project lifecycle of an advanced CNN-based deepfake forensics system from theoretical research to implementation.",
     highlights: [
-      "Led end-to-end project lifecycle and guided architecture decisions as team leader",
-      "Benchmarked deep learning architectures (XceptionNet, ResNet, VGG) in Python, TensorFlow/Keras, and OpenCV",
-      "Designed ensemble techniques achieving up to 99.65% accuracy; analyzed model trade-offs in depth",
+      "Conducted extensive literature synthesis of 112 peer-reviewed research papers in facial manipulation detection",
+      "Evaluated CNN architectures (XceptionNet, ResNet, VGG) averaging 89.73% baseline accuracy",
+      "Engineered ensemble neural architectures achieving up to 99.65% classification accuracy",
+      "Extensive analysis of model trade-offs, compute constraints, and real-time evaluation metrics",
     ],
   },
   {
-    company: "Independent Systems & Open Source",
-    role: "Full-Stack Developer & Systems Builder",
-    duration: "2024 — Present",
-    location: "Hyderabad, India",
+    company: "Technook · Hyderabad",
+    role: "AI Mentorship Intern",
+    duration: "May — Jun 2024",
     color: "var(--ember)",
     glowColor: "rgba(160, 42, 34, 0.25)",
     description:
-      "Designing and shipping production-ready web applications, LLM observability tooling, and autonomous embedded hardware systems.",
+      "Hands-on AI and Machine Learning internship building end-to-end data preprocessing and predictive modeling pipelines.",
     highlights: [
-      "Engineered TraceLens: LLM prompt waterfall latency tracing, token cost analytics, and neural telemetry",
-      "Built CryptoSphere: live crypto tracking with CoinGecko API, TradingView charting, and MongoDB REST API",
-      "Programmed Human Following Robot with sensor fusion (Ultrasonic + IR) in C/C++ on Arduino Uno",
+      "Built and evaluated AI/ML models across structured and unstructured datasets",
+      "Implemented comprehensive data preprocessing pipelines: cleaning, normalization, and feature engineering",
+      "Assessed model performance rigorously using accuracy, precision, recall, and F1-score metrics",
+    ],
+  },
+  {
+    company: "Independent Engineering",
+    role: "Full-Stack & Embedded Systems Developer",
+    duration: "2022 — 2024",
+    color: "var(--ember)",
+    glowColor: "rgba(160, 42, 34, 0.25)",
+    description:
+      "Building production-grade full-stack web applications and hardware robotics systems.",
+    highlights: [
+      "Built real-time crypto analytics platform with CoinGecko API, TradingView charting, and MongoDB REST APIs",
+      "Engineered autonomous human-following robot using Arduino Uno, ultrasonic & IR sensor fusion, and L293D motor drivers",
+      "Proficient in Python, C/C++, Java, React.js, Node.js, Express.js, and core CS fundamentals (OOPs, DBMS, OS, Networks)",
     ],
   },
 ];
@@ -63,7 +61,7 @@ export default function Experience() {
     if (typeof window === "undefined" || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>(".exp-item");
+      const cards = gsap.utils.toArray<HTMLElement>(".exp-grid-card");
       cards.forEach((card, i) => {
         gsap.fromTo(
           card,
@@ -112,18 +110,18 @@ export default function Experience() {
           <div className="flex items-center gap-2 mb-3">
             <span className="w-8 h-[2px] bg-ember inline-block rounded-full" />
             <span className="text-ember text-xs font-bold tracking-[0.25em] uppercase">
-              Experience &amp; Leadership
+              Experience
             </span>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight">
-            Work &amp; Project Experience
+            Where I&apos;ve Been
           </h2>
           <p className="mt-4 text-base md:text-lg text-ash max-w-xl leading-relaxed font-normal">
-            Professional internships, technical project leadership, and real-time system implementations.
+            My professional journey through different roles and environments.
           </p>
         </div>
 
-        {/* Editorial Experience List */}
+        {/* Clean Boxless Editorial Experience List */}
         <div className="space-y-12 max-w-4xl mx-auto">
           {EXPERIENCES.map((exp, i) => (
             <div
@@ -135,11 +133,10 @@ export default function Experience() {
                 <span className="text-xs font-mono font-medium text-ash tracking-wider block mb-1">
                   {exp.duration}
                 </span>
-                <span className="text-sm font-semibold tracking-wider uppercase block font-mono text-ember mb-1">
+                <span
+                  className="text-sm font-semibold tracking-wider uppercase block font-mono text-ember"
+                >
                   {exp.company}
-                </span>
-                <span className="text-xs text-ash/80 block">
-                  {exp.location}
                 </span>
               </div>
 

@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 const NAV_LINKS = [
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
-  { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -91,7 +90,7 @@ export default function Navbar() {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           >
-            <span className="text-ember">V</span>P
+            <span className="text-ember">M</span>P
             <span className="text-ember">.</span>
           </a>
 

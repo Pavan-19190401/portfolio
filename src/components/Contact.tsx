@@ -8,10 +8,10 @@ import MagneticButton from "./MagneticButton";
 gsap.registerPlugin(ScrollTrigger);
 
 const SOCIAL_LINKS = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/manikanta-pavan-vennu1906", icon: "https://api.iconify.design/simple-icons:linkedin.svg?color=%23ffffff" },
   { label: "GitHub", href: "https://github.com/Pavan-19190401", icon: "https://cdn.simpleicons.org/github/ffffff" },
-  { label: "LinkedIn", href: "https://linkedin.com/in/manikanta-pavan-vennu1906", icon: "https://api.iconify.design/simple-icons:linkedin.svg?color=%23ffffff" },
-  { label: "Email", href: "mailto:manikantapavanv@gmail.com", icon: "https://api.iconify.design/carbon:email.svg?color=%23ffffff" },
-  { label: "Phone", href: "tel:+917396870319", icon: "https://api.iconify.design/carbon:phone.svg?color=%23ffffff" },
+  { label: "Email", href: "mailto:manikantapavanv@gmail.com", icon: "https://api.iconify.design/material-symbols:mail.svg?color=%23ffffff" },
+  { label: "Phone", href: "tel:+917396870319", icon: "https://api.iconify.design/material-symbols:call.svg?color=%23ffffff" },
 ];
 
 export default function Contact() {
@@ -88,13 +88,13 @@ export default function Contact() {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.15] tracking-tight"
             style={{ fontFamily: "var(--font-poppins), sans-serif" }}
           >
-            Let&apos;s Connect &amp; Collaborate
+            Let&apos;s Create Something Extraordinary
           </h2>
           <p
             className="mt-4 md:mt-6 text-base md:text-lg text-ash max-w-xl mx-auto leading-relaxed font-normal"
             style={{ fontFamily: "var(--font-poppins), sans-serif" }}
           >
-            Interested in discussing full-stack development, machine learning projects, or engineering opportunities? Reach out anytime.
+            Have a project in mind? I&apos;d love to hear about it. Let&apos;s build something amazing together.
           </p>
         </div>
 
@@ -124,7 +124,7 @@ export default function Contact() {
                     <p className="text-xs text-ash uppercase tracking-wider mb-1 font-semibold">Email</p>
                     <a
                       href="mailto:manikantapavanv@gmail.com"
-                      className="text-sm text-white hover:text-ember transition-colors font-medium break-all"
+                      className="text-sm text-white hover:text-ember transition-colors font-medium"
                       style={{ fontFamily: "var(--font-poppins), sans-serif" }}
                     >
                       manikantapavanv@gmail.com
@@ -177,7 +177,7 @@ export default function Contact() {
 
             {/* Social links */}
             <div className="mt-8 pt-6 border-t border-white/5">
-              <p className="text-xs text-ash uppercase tracking-wider mb-4 font-semibold">Profiles &amp; Links</p>
+              <p className="text-xs text-ash uppercase tracking-wider mb-4 font-semibold">Socials</p>
               <div className="flex gap-3">
                 {SOCIAL_LINKS.map((link) => (
                   <a
@@ -251,7 +251,7 @@ export default function Contact() {
                 rows={5}
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder:text-iron focus:outline-none focus:border-ember/50 transition-colors resize-none"
                 style={{ fontFamily: "var(--font-poppins), sans-serif" }}
-                placeholder="Tell me about your project or opportunity..."
+                placeholder="Tell me about your project..."
                 required
               />
             </div>
@@ -279,12 +279,9 @@ export default function Contact() {
           fontFamily: "var(--font-poppins), sans-serif",
         }}
       >
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-left">
+        <div className="flex items-center justify-start text-left">
           <p className="text-xs text-ash" suppressHydrationWarning>
-            © {new Date().getFullYear()} Vennu Manikanta Pavan. All rights reserved.
-          </p>
-          <p className="text-xs text-ash/70 font-mono">
-            CMR Institute of Technology • Hyderabad, India
+            © {new Date().getFullYear()} Vennu Manikanta Pavan. Crafted with passion.
           </p>
         </div>
       </div>

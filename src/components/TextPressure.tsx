@@ -130,9 +130,26 @@ export const TextPressure: React.FC<TextPressureProps> = ({
 
   useEffect(() => {
     let rafId: number;
+    let isVisible = true;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(animate);
+      }
+    });
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
     const animate = () => {
-      mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
-      mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
+      if (!isVisible) return;
+
+      // Graceful, somewhat slow fluid easing (38 frames smooth response)
+      mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 38;
+      mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 38;
 
       if (titleRef.current) {
         const titleRect = titleRef.current.getBoundingClientRect();
@@ -168,8 +185,11 @@ export const TextPressure: React.FC<TextPressureProps> = ({
       rafId = requestAnimationFrame(animate);
     };
 
-    animate();
-    return () => cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(animate);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(rafId);
+    };
   }, [width, weight, italic, alpha]);
 
   const styleElement = useMemo(() => {

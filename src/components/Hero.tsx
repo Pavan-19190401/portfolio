@@ -161,43 +161,33 @@ export default function Hero() {
   }, []);
 
   /* ──────────────────────────────────────────────
-     MOUSE INTERACTION
+     MOUSE INTERACTION (Optimized rAF)
      ────────────────────────────────────────────── */
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
+    let ticking = false;
     const onMove = (e: MouseEvent) => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      const x = (e.clientX / w - 0.5) * 2;
-      const y = (e.clientY / h - 0.5) * 2;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const x = (e.clientX / w - 0.5) * 2;
+        const y = (e.clientY / h - 0.5) * 2;
 
-      // Spotlight follows cursor (softened intensity)
-      if (spotlightRef.current) {
-        gsap.to(spotlightRef.current, {
-          x: x * 40,
-          y: y * 25,
-          duration: 1.5,
-          ease: "power2.out",
-        });
-      }
-
-      // Dust particles react (softened intensity)
-      if (particlesRef.current) {
-        const dots = particlesRef.current.querySelectorAll(".dust");
-        dots.forEach((d, i) => {
-          gsap.to(d, {
-            x: x * (2 + i * 0.8),
-            y: y * (1.5 + i * 0.6),
-            duration: 1.8 + i * 0.08,
-            ease: "power2.out",
-          });
-        });
-      }
+        if (spotlightRef.current) {
+          spotlightRef.current.style.transform = `translate3d(calc(-50% + ${x * 35}px), calc(-50% + ${y * 25}px), 0)`;
+        }
+        if (particlesRef.current) {
+          particlesRef.current.style.transform = `translate3d(${x * 12}px, ${y * 8}px, 0)`;
+        }
+        ticking = false;
+      });
     };
 
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
     return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
@@ -211,16 +201,16 @@ export default function Hero() {
       className="relative h-screen overflow-hidden"
       style={{ background: "#111111" }}
     >
-      {/* ── React Bits Ghost Cursor Effect (Vibrant Orange Secondary Accent Glow) ── */}
+      {/* ── React Bits Ghost Cursor Effect (Vibrant Orange Secondary Accent Glow behind Name) ── */}
       <GhostCursor
         color="#FC6B2F"
         brightness={0.75}
         edgeIntensity={0}
-        trailLength={35}
+        trailLength={30}
         inertia={0.4}
-        grainIntensity={0.025}
-        bloomStrength={0.08}
-        bloomRadius={0.8}
+        grainIntensity={0.02}
+        bloomStrength={0.07}
+        bloomRadius={0.7}
         bloomThreshold={0.04}
         fadeDelayMs={800}
         fadeDurationMs={1200}
@@ -296,12 +286,12 @@ export default function Hero() {
         ref={badgeRef}
         className="absolute top-20 md:top-24 left-6 md:left-14 lg:left-20 z-[40] opacity-0 flex items-center gap-2.5"
       >
-        <span className="w-[7px] h-[7px] rounded-full bg-emerald-500 animate-pulse" />
+        <span className="w-[7px] h-[7px] rounded-full bg-ember animate-pulse" />
         <span
           className="text-[11px] text-[#B5B5B5] tracking-[0.2em] uppercase font-medium"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Available for Opportunities • Open to Relocation
+          B.Tech CSE (AI &amp; ML) · Open to Opportunities
         </span>
       </div>
 
@@ -310,13 +300,13 @@ export default function Hero() {
          ════════════════════════════════════════ */}
       <div
         ref={paraRef}
-        className="absolute top-[72%] sm:top-[74%] left-6 md:left-14 lg:left-20 z-[40] max-w-[380px] lg:max-w-[460px] opacity-0"
+        className="absolute top-[72%] sm:top-[74%] left-6 md:left-14 lg:left-20 z-[40] max-w-[380px] lg:max-w-[420px] opacity-0"
       >
         <p
           className="text-[13px] md:text-[14px] text-[#B5B5B5] leading-[1.8] font-normal tracking-wide"
           style={{ fontFamily: "var(--font-poppins), sans-serif" }}
         >
-          B.Tech CSE (AI &amp; ML) undergraduate at CMRIT Hyderabad with hands-on expertise across full-stack development, machine learning, and real-time systems.
+          Full-Stack Developer &amp; AI/ML Engineer building scalable web architectures, deep learning systems, and intelligent robotics.
         </p>
       </div>
 
@@ -348,13 +338,30 @@ export default function Hero() {
           </span>
         </MagneticButton>
 
-        <MagneticButton
-          href="#contact"
-          variant="outline"
-          className="!rounded-full !px-6 !py-3 !text-[12px] !border-white/15"
-        >
-          Let's Talk →
-        </MagneticButton>
+        <div className="flex items-center gap-3">
+          <MagneticButton
+            href="/resume.pdf"
+            variant="outline"
+            className="!rounded-full !px-5 !py-3 !text-[12px] !border-white/20 hover:!border-ember/50 text-white"
+          >
+            <span className="flex items-center gap-2">
+              <span>Resume</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
+              </svg>
+            </span>
+          </MagneticButton>
+
+          <MagneticButton
+            href="#contact"
+            variant="outline"
+            className="!rounded-full !px-5 !py-3 !text-[12px] !border-white/15"
+          >
+            Let's Talk →
+          </MagneticButton>
+        </div>
       </div>
 
       {/* ════════════════════════════════════════
@@ -367,7 +374,7 @@ export default function Hero() {
       >
         <div className="w-full max-w-[700px] md:max-w-[850px] h-[100px] md:h-[135px] relative flex items-center justify-center scale-y-[1.15] transform-gpu drop-shadow-[0_0_35px_rgba(252,107,47,0.3)]">
           <TextPressure
-            text="PAVAN"
+            text="MANIKANTA"
             flex={true}
             alpha={false}
             stroke={false}
@@ -379,13 +386,13 @@ export default function Hero() {
           />
         </div>
 
-        {/* Small footer text at the base of upper-centered PAVAN */}
+        {/* Small footer text at the base of upper-centered MANIKANTA */}
         <div ref={headlineRef} className="mt-3 md:mt-4 text-center z-[20]">
           <p
             className="hero-line text-[clamp(0.72rem,1.08vw,0.88rem)] font-extrabold tracking-[0.25em] uppercase text-ember drop-shadow-[0_0_20px_rgba(252,107,47,0.7)]"
             style={{ fontFamily: "var(--font-poppins), sans-serif" }}
           >
-            VENNU MANIKANTA PAVAN • AI &amp; FULL-STACK DEVELOPER
+            Vennu Manikanta Pavan · AI &amp; Full-Stack Engineer
           </p>
         </div>
       </div>

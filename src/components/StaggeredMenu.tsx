@@ -423,7 +423,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
             className="text-white font-bold text-xl tracking-tight"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            <span className="text-ember">J</span>M
+            <span className="text-ember">M</span>P
             <span className="text-ember">.</span>
           </a>
         </div>
@@ -461,6 +461,8 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                   <a
                     className="sm-panel-item"
                     href={it.link}
+                    target={it.link.endsWith('.pdf') || it.link.startsWith('http') ? '_blank' : undefined}
+                    rel={it.link.endsWith('.pdf') || it.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                     onClick={(e) => handleItemClick(e, it.link)}
                     aria-label={it.ariaLabel}
                     data-index={idx + 1}

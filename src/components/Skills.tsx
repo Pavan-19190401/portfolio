@@ -11,37 +11,34 @@ interface Skill {
 }
 
 const SKILLS: Skill[] = [
-  // Primary & Languages
+  // Languages & CS
   { name: "Python", icon: "https://cdn.simpleicons.org/python/3776AB", category: "Languages" },
-  { name: "Java", icon: "https://cdn.simpleicons.org/openjdk/ffffff", category: "Languages" },
+  { name: "Java", icon: "https://cdn.simpleicons.org/openjdk/ED8B00", category: "Languages" },
   { name: "C / C++", icon: "https://cdn.simpleicons.org/cplusplus/00599C", category: "Languages" },
   { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript/F7DF1E", category: "Languages" },
   { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript/3178C6", category: "Languages" },
-
   // Web & Full-Stack
-  { name: "React.js", icon: "https://cdn.simpleicons.org/react/61DAFB", category: "Web / Full-Stack" },
-  { name: "Next.js", icon: "https://cdn.simpleicons.org/nextdotjs/ffffff", category: "Web / Full-Stack" },
-  { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/5FA04E", category: "Web / Full-Stack" },
-  { name: "Express.js", icon: "https://cdn.simpleicons.org/express/ffffff", category: "Web / Full-Stack" },
-  { name: "MongoDB", icon: "https://cdn.simpleicons.org/mongodb/47A248", category: "Web / Full-Stack" },
-  { name: "Tailwind CSS", icon: "https://cdn.simpleicons.org/tailwindcss/06B6D4", category: "Web / Full-Stack" },
-  { name: "REST APIs", icon: "https://api.iconify.design/carbon:api.svg?color=%23ffffff", category: "Web / Full-Stack" },
-
-  // ML / AI
+  { name: "React.js", icon: "https://cdn.simpleicons.org/react/61DAFB", category: "Full-Stack" },
+  { name: "Node.js", icon: "https://cdn.simpleicons.org/nodedotjs/5FA04E", category: "Full-Stack" },
+  { name: "Express.js", icon: "https://cdn.simpleicons.org/express/ffffff", category: "Full-Stack" },
+  { name: "MongoDB", icon: "https://cdn.simpleicons.org/mongodb/47A248", category: "Full-Stack" },
+  { name: "HTML5", icon: "https://cdn.simpleicons.org/html5/E34F26", category: "Full-Stack" },
+  { name: "CSS3", icon: "https://cdn.simpleicons.org/css/1572B6", category: "Full-Stack" },
+  { name: "REST APIs", icon: "https://api.iconify.design/dashicons:rest-api.svg?color=%2300d8d6", category: "Full-Stack" },
+  // Machine Learning & AI
   { name: "TensorFlow", icon: "https://cdn.simpleicons.org/tensorflow/FF6F00", category: "ML / AI" },
   { name: "Keras", icon: "https://cdn.simpleicons.org/keras/D00000", category: "ML / AI" },
   { name: "Scikit-Learn", icon: "https://cdn.simpleicons.org/scikitlearn/F7931E", category: "ML / AI" },
   { name: "OpenCV", icon: "https://cdn.simpleicons.org/opencv/5C3EE8", category: "ML / AI" },
   { name: "NumPy", icon: "https://cdn.simpleicons.org/numpy/013243", category: "ML / AI" },
   { name: "Pandas", icon: "https://cdn.simpleicons.org/pandas/150458", category: "ML / AI" },
-
-  // Tools & Hardware
+  // Tools & Embedded
   { name: "Git", icon: "https://cdn.simpleicons.org/git/F05032", category: "Tools" },
   { name: "GitHub", icon: "https://cdn.simpleicons.org/github/ffffff", category: "Tools" },
-  { name: "VS Code", icon: "https://api.iconify.design/logos:visual-studio-code.svg", category: "Tools" },
-  { name: "Jupyter", icon: "https://cdn.simpleicons.org/jupyter/F37626", category: "Tools" },
+  { name: "VS Code", icon: "https://cdn.simpleicons.org/visualstudiocode/007ACC", category: "Tools" },
   { name: "Google Colab", icon: "https://cdn.simpleicons.org/googlecolab/F9AB00", category: "Tools" },
-  { name: "Arduino Uno", icon: "https://cdn.simpleicons.org/arduino/00979D", category: "Hardware" },
+  { name: "Jupyter", icon: "https://cdn.simpleicons.org/jupyter/F37626", category: "Tools" },
+  { name: "Arduino", icon: "https://cdn.simpleicons.org/arduino/00979D", category: "Embedded" },
 ];
 
 export default function Skills() {
@@ -63,9 +60,9 @@ export default function Skills() {
 
       <div className="section-container">
         <SectionHeading
-          eyebrow="Core Technical Competencies"
-          title="Skills & Technologies"
-          subtitle="Proficiency across Python, Web / Full-Stack architectures, Deep Learning frameworks, and Embedded Systems."
+          eyebrow="Skills & Tools"
+          title="My Arsenal"
+          subtitle="Technologies I use to bring ideas to life. Interactive 3D drift wall showcasing frontend, backend, design, and AI capabilities."
           align="center"
         />
 

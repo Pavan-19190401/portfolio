@@ -146,7 +146,7 @@ export default function Projects() {
           />
 
           {/* Folder Toolbar Controls */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-5 border-b border-white/5 relative z-10">
+          <div data-folder-control="true" className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-5 border-b border-white/5 relative z-10">
             <div className="flex items-center gap-2 text-xs text-ash font-mono">
               <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: folderColor }} />
               <span className="text-white font-semibold">Interactive Archive</span>
@@ -158,8 +158,13 @@ export default function Projects() {
               {/* Open / Close Toggle Button */}
               <button
                 type="button"
-                onClick={() => setFolderOpen(!folderOpen)}
-                className="px-3.5 py-1.5 rounded-full text-xs font-mono font-medium border border-white/15 bg-white/5 text-cloud hover:bg-white/15 hover:border-white/30 transition-all cursor-pointer"
+                data-folder-control="true"
+                onPointerDown={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFolderOpen((prev) => !prev);
+                }}
+                className="px-3.5 py-1.5 rounded-full text-xs font-mono font-medium border border-white/15 bg-white/5 text-cloud hover:bg-white/15 hover:border-white/30 transition-all cursor-pointer active:scale-95"
               >
                 {folderOpen ? "Close Folder" : "Open Folder"}
               </button>
@@ -168,7 +173,12 @@ export default function Projects() {
               <div className="flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 text-xs font-mono">
                 <button
                   type="button"
-                  onClick={() => setFolderMode('flap')}
+                  data-folder-control="true"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFolderMode('flap');
+                  }}
                   className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
                     folderMode === 'flap' ? 'bg-white/20 text-white font-bold' : 'text-ash hover:text-white'
                   }`}
@@ -177,7 +187,12 @@ export default function Projects() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setFolderMode('book')}
+                  data-folder-control="true"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFolderMode('book');
+                  }}
                   className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
                     folderMode === 'book' ? 'bg-white/20 text-white font-bold' : 'text-ash hover:text-white'
                   }`}
@@ -190,7 +205,12 @@ export default function Projects() {
               <div className="flex items-center bg-white/5 border border-white/10 rounded-full p-0.5 text-xs font-mono">
                 <button
                   type="button"
-                  onClick={() => setFolderVariant('glass')}
+                  data-folder-control="true"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFolderVariant('glass');
+                  }}
                   className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
                     folderVariant === 'glass' ? 'bg-white/20 text-white font-bold' : 'text-ash hover:text-white'
                   }`}
@@ -199,7 +219,12 @@ export default function Projects() {
                 </button>
                 <button
                   type="button"
-                  onClick={() => setFolderVariant('solid')}
+                  data-folder-control="true"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFolderVariant('solid');
+                  }}
                   className={`px-3 py-1 rounded-full transition-all cursor-pointer ${
                     folderVariant === 'solid' ? 'bg-white/20 text-white font-bold' : 'text-ash hover:text-white'
                   }`}
@@ -219,7 +244,12 @@ export default function Projects() {
                     key={c.hex}
                     type="button"
                     title={c.name}
-                    onClick={() => setFolderColor(c.hex)}
+                    data-folder-control="true"
+                    onPointerDown={(e) => e.stopPropagation()}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setFolderColor(c.hex);
+                    }}
                     style={{ backgroundColor: c.hex }}
                     className={`w-4 h-4 rounded-full transition-transform cursor-pointer ${
                       folderColor === c.hex ? 'ring-2 ring-white scale-110' : 'opacity-70 hover:opacity-100 hover:scale-105'

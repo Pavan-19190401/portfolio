@@ -895,11 +895,12 @@ const Folder: React.FC<FolderProps> = ({
 
   const setOpen = useCallback(
     (next: any) => {
-      const value = typeof next === 'function' ? next(isOpen) : next;
-      if (!isControlled) setInternalOpen(value);
-      if (value !== isOpen) onOpenChange?.(value);
+      const current = isControlled ? Boolean(open) : internalOpen;
+      const value = typeof next === 'function' ? next(current) : next;
+      setInternalOpen(value);
+      if (value !== current) onOpenChange?.(value);
     },
-    [isControlled, isOpen, onOpenChange]
+    [isControlled, open, internalOpen, onOpenChange]
   );
 
   const setOpenRef = useRef(setOpen);
@@ -1644,7 +1645,7 @@ const Folder: React.FC<FolderProps> = ({
         drag.samples.push([now, x, y]);
         while (drag.samples.length > 2 && now - drag.samples[0][0] > 100) drag.samples.shift();
         if (!drag.active) {
-          const threshold = event.pointerType === 'touch' ? 8 : 4;
+          const threshold = event.pointerType === 'touch' ? 12 : 8;
           if (Math.hypot(event.clientX - drag.clientX, event.clientY - drag.clientY) > threshold) startDrag(drag);
         }
         if (drag.active) updateReceiving();
@@ -1685,12 +1686,16 @@ const Folder: React.FC<FolderProps> = ({
       if (event.button > 0) return;
       state.suppressClick = false;
       const target = (event.target as HTMLElement)?.closest?.('[data-folder-item]');
-      if (target && root.contains(target) && settingsRef.current.draggable) {
+      const itemIndex = target ? Number(target.getAttribute('data-folder-item')) : -1;
+      const canDrag =
+        settingsRef.current.draggable &&
+        (settingsRef.current.open || (itemIndex >= 0 && state.items[itemIndex]?.place === 'out'));
+      if (target && root.contains(target) && canDrag) {
         const [x, y] = toDesk(event.clientX, event.clientY);
         state.deskX = x;
         state.deskY = y;
         state.drag = {
-          index: Number(target.getAttribute('data-folder-item')),
+          index: itemIndex,
           id: event.pointerId,
           clientX: event.clientX,
           clientY: event.clientY,
@@ -1725,7 +1730,10 @@ const Folder: React.FC<FolderProps> = ({
     };
 
     const onDocumentDown = (event: MouseEvent) => {
-      if (root.contains(event.target as Node)) return;
+      const target = event.target as HTMLElement | null;
+      if (!target) return;
+      if (root.contains(target)) return;
+      if (target.closest?.('[data-folder-control]')) return;
       const s = settingsRef.current;
       if (state.focus >= 0) {
         state.focus = -1;
@@ -1851,7 +1859,13 @@ const Folder: React.FC<FolderProps> = ({
       event.stopPropagation();
       return;
     }
-    if (!engine.interactive(index)) return;
+    if (!engine.interactive(index)) {
+      if (!isOpen) {
+        event.stopPropagation();
+        toggle();
+      }
+      return;
+    }
     event.stopPropagation();
     engine.select(index);
   };
